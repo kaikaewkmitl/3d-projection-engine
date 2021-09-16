@@ -27,7 +27,7 @@ Additionally a camera can be made by constantly updating our "perspective" upon 
 * **OBJECT 3D Projection method on a 2D plane.**
 ![](images/3dprojection.png)
 
-![](images/perspective.png) 
+![](images/perspective.png) \
 P are vertices of the object
 * **PERSPECTIVE Matrix relation with the object.**
 ![](images/objectandperspective%20relation.png)
