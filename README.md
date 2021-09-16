@@ -7,7 +7,7 @@ The proposal will include the following sections:
 
 
 ## Detailed Description:
-Please read the simplified description first.
+Please read the simplified description above first.
 * Checkpoint (1.) \
 We first need a console engine that creates a 'blank' window application from win32 api,directx or any other optional libary in order to show us the output/result and serve us as a GUI for example olcgameengine window which is made up of 6base number 6x6 array in which each array is translated from a coordinate(x,y) with the following formula: 
 array[i] = y *(i in range (x,y)) + x 
