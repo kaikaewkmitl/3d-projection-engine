@@ -8,7 +8,7 @@ The proposal will include the following sections:
 
 ## Description:
 * Checkpoint (1.) \
-We first need a console engine that creates a 'blank' window application from win32 api,directx or any other optional libary in order to show us the output/result and serve us as a GUI for example olcgameengine window which is made up of 6base number 6x6 array in which each array is translated from a coordinate(x,y) with the following formula: Draw(x,y) = y*(screenwidth())*x in which Draw(x,y) is a function that implies its name.NOTE: Draw(x,y) is an example of an imported function.
+We first need a console engine that creates a 'blank' window application from win32 api,directx or any other optional libary in order to show us the output/result and serve us as a GUI for example olcgameengine window which is made up of 6base number 6x6 array in which each array is translated from a coordinate(x,y) with the following formula: Draw(x,y) = y*(screenwidth())*x in which Draw(x,y) is a function that implies its name. NOTE: Draw(x,y) is an example of an imported function.
 * Checkpoint (2.)\
 Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to translate the variable and calculate the "object" and  "projection" output for us. For more detail about the method please read the documentation provided below.
 * Checkpoint (3.)\
