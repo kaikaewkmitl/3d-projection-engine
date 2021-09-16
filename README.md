@@ -10,4 +10,4 @@ The proposal will include the following sections:
 
 ## Documentation:
 
-## Trivia
+## Trivia and Reference:
