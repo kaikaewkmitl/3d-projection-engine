@@ -21,15 +21,15 @@ Additionally a camera can be made by constantly updating our "perspective" upon 
 
 
 ## Documentation:
-* ENGINE Example of a 2D Plane Window Application. \
+* ENGINE Example of a 2D Plane Window Application. 
 ![](images/p2.png)
-* OBJECT 3D Projection method on a 2D plane.\
+* OBJECT 3D Projection method on a 2D plane.
 ![](images/3dprojection.png)
 * Defining Perspective
 ![](images/perspective.png)
-* PERSPECTIVE Matrix relation with the object \
+* PERSPECTIVE Matrix relation with the object 
 ![](images/objectandperspective%20relation.png)
-* MATRIX ROTATION relation with object movement method. \
+* MATRIX ROTATION relation with object movement method. 
 ![](images/matrix%20rotation.jpg)
 
 
