@@ -8,15 +8,17 @@ The proposal will include the following sections:
 
 ## Description:
 * Checkpoint (1.) \
-\
-We first need a console engine that creates a window application from win32 api,directx or any other optional libary in order to show us the output/result.
+We first need a console engine that creates a window application from win32 api,directx or any other optional libary in order to show us the output/result.\
 * Checkpoint (2.)\
-\
-Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to calculate the "object" and  "projection" output for us. For more detail about the method please read the documentation provided below.
+Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to calculate the "object" and  "projection" output for us. For more detail about the method please read the documentation provided below.\
 * Checkpoint (3.)\
-Finally we can observe the outcome from our designated "perspective", also we can make the object dynamic by constantly updating its position precisely using "matrix rotation" and mathematics additionally  a first person camera is posible by constantly updating our "perspective" upon WASD input.
+Finally we can observe the outcome from our designated "perspective", also we can make the object dynamic by constantly updating its position precisely using "matrix rotation" and mathematics additionally a first person camera is possible by constantly updating our "perspective" upon WASD input.\
 
 
 ## Documentation:
+* Example of a 
 
-## Trivia and Reference:
+## Trivia,Reference and Requirements:
+* olcgamengine from OneLoneCode 
+* Direct2D
+* 
