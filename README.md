@@ -32,5 +32,5 @@ Additionally a camera can be made by constantly updating our "perspective" upon 
 -SFML \
 -DirectX \
 -olcgameengine https://www.youtube.com/watch?v=u5BhrA8ED0o&t=1080s&ab_channel=javidx9 \
--2DgameEngine Derived from Direct2D \
+-2DgameEngine Derived from Direct2D 
 
