@@ -1,4 +1,4 @@
-# C Programming Project Proposal
+# C Programming Project: 3D Projection Engine 
 
 ## Proposal Structure
 The proposal will include the following sections:
