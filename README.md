@@ -2,7 +2,8 @@
 
 ## Proposal Structure
 The proposal will include the following sections:
-* Project Title
+* Project Title:
+.
 * Description
 * Team Members
 
