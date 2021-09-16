@@ -7,7 +7,7 @@ The proposal will include the following sections:
 * Team Members: 
 
 ## Description:
-* Checkpoint 1 or (1.)
+* Checkpoint 1 or (1.) \
 By importing a libary
 
 ## Documentation:
