@@ -14,7 +14,7 @@ Next we need a base engine from any graphical libary composed of functions that 
 * Checkpoint (3.)\
 Finally we can observe the outcome from our designated "perspective", also we can make the object dynamic by constantly updating its position precisely using "matrix rotation" and mathematics.
 * Room for improvement \
-Additionally a camera can be made by constantly updating our "perspective" upon WASD input thus ray-casting and ray-tracing is possible to make up a viable first person game also we can add texture to the object or import a texture by reading a FILE which contains our desired parameter(input) in a specific format.
+Additionally a camera can be made by constantly updating our "perspective" upon WASD input thus ray-casting and ray-tracing is possible to make up a viable first person game also we can add texture to the object or import a texture by reading a FILE which contains our desired parameter(input) in a specified format.
 
 
 
