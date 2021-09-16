@@ -8,17 +8,29 @@ The proposal will include the following sections:
 
 ## Description:
 * Checkpoint (1.) \
-We first need a console engine that creates a window application from win32 api,directx or any other optional libary in order to show us the output/result. 
+We first need a console engine that creates a window application from win32 api,directx or any other optional libary in order to show us the output/result for example olcgameengine window which is made up of 6base number 6x6 array in which each array is translated from a coordinate(x,y) with the following formula: Draw(x,y) = y*(screenwidth())*x in which Draw(x,y) is a function that implies its name.
 * Checkpoint (2.)\
-Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to calculate the "object" and  "projection" output for us. For more detail about the method please read the documentation provided below. 
+Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to translate the variable and calculate the "object" and  "projection" output for us. For more detail about the method please read the documentation provided below.
 * Checkpoint (3.)\
-Finally we can observe the outcome from our designated "perspective", also we can make the object dynamic by constantly updating its position precisely using "matrix rotation" and mathematics additionally a first person camera is possible by constantly updating our "perspective" upon WASD input. 
+Finally we can observe the outcome from our designated "perspective", also we can make the object dynamic by constantly updating its position precisely using "matrix rotation" and mathematics.
+* Room for improvement \
+Additionally a camera can be made by constantly updating our "perspective" upon WASD input thus ray-casting and ray-tracing is possible to make up a viable first person game also we can add texture to the object or import a texture by reading a FILE which contains our desired parameter(input) in a specific format.
+
 
 
 ## Documentation:
-* Example of a 
+* ENGINE Example of a 2D Plane Window Application.
+* OBJECT 3D Projection method on a 2D plane.
+* PERSPECTIVE Matrix relation with the object 
+* MATRIX ROTATION relation with object movement method.
+
+
 
 ## Trivia,Reference and Requirements:
-* olcgamengine from OneLoneCode 
-* Direct2D
-* 
+* C/C++ Optional Lbaries:
+-OpenGL
+-SFML
+-DirectX
+-olcgameengine https://www.youtube.com/watch?v=u5BhrA8ED0o&t=1080s&ab_channel=javidx9
+-2DgameEngine Derived from Direct2D
+
