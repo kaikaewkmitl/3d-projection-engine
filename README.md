@@ -6,7 +6,7 @@ The proposal will include the following sections:
 * Description: This program (1.) projects a 3D illusion into a 2D plane (2.) by drawing inclined or declined lines from  coordinates or vertices in a certain angle from a perspective point (3.) to make a 3D object for detailed method please read the detail below.
 * Team Members: \
   Phobphoomin Siriboon (64011548)\
-  Mahnun 
+  Mahnun Saratunti (64011456)
 
 
 ## Detailed Description:
