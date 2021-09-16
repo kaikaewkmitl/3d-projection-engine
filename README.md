@@ -6,7 +6,7 @@ The proposal will include the following sections:
 * Description: This program (1.) projects a 3D illusion into a 2D plane (2.) by drawing inclined or declined lines from  coordinates or vertices in a certain angle from a perspective point (3.) to make a 3D object.
 
 
-## Description:
+## Detailed Description:
 * Checkpoint (1.) \
 We first need a console engine that creates a 'blank' window application from win32 api,directx or any other optional libary in order to show us the output/result and serve us as a GUI for example olcgameengine window which is made up of 6base number 6x6 array in which each array is translated from a coordinate(x,y) with the following formula: Draw(x,y) = y*(screenwidth())*x in which Draw(x,y) is a function that implies its name. NOTE: Draw(x,y) is an example of an imported function.
 * Checkpoint (2.)\
