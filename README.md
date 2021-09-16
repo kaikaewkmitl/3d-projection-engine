@@ -47,5 +47,5 @@ P are vertices of the object
 Visual Studio IDE 
 
 ## Example of the finalized project.
-![](images/image.png)
+![](images/final.png)
 
