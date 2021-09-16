@@ -8,6 +8,6 @@ The proposal will include the following sections:
 
 ## Project: 
 
-## Project Description
+## Documentation:
 
-## Team Members
+## Trivia
