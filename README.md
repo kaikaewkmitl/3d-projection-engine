@@ -46,6 +46,6 @@ P are vertices of the object
 * Recommended IDE: \
 Visual Studio IDE 
 
-## Example of the finalized project.
+## Example of the finalized project:
 ![](images/final.png)
 
