@@ -45,3 +45,7 @@ P are vertices of the object
 -2DgameEngine Derived from Direct2D 
 * Recommended IDE: \
 Visual Studio IDE 
+
+## Example of the finalized project.
+
+![](images/image.png)
