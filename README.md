@@ -7,7 +7,7 @@ The proposal will include the following sections:
   1. projects a 3D illusion into a 2D plane ([checkpoint 1](#checkpoint-1))
   2. by drawing inclined or declined lines from  coordinates or vertices in a certain angle from a perspective point ([checkpoint 2](#checkpoint-2))
   3. to make a 3D object for detailed method please read the detail below. ([checkpoint 3](#checkpoint-3))
-* Team Members: 
+* **Team Members:** 
   * Phobphoomin Siriboon (64011548)
   * Mahnun Saratunti (64011456)
 
@@ -36,7 +36,7 @@ Additionally a camera can be made by constantly updating our "perspective" upon 
 * **OBJECT 3D Projection method on a 2D plane.**
 ![](images/3dprojection.png)
 
-![](images/perspective.png) 
+![](images/perspective.png)  \
 P are vertices of the object
 * **PERSPECTIVE Matrix relation with the object.**
 ![](images/objectandperspective%20relation.png)
@@ -45,7 +45,7 @@ P are vertices of the object
 
 
 
-## Trivia,Reference and Requirements:
+## Trivia, Reference and Requirements:
 * C/C++ Optional Lbaries: 
   * OpenGL 
   * SFML 
