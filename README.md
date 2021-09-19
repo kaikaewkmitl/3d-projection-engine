@@ -40,7 +40,7 @@ Additionally a camera can be made by constantly updating our "perspective" upon 
 
 #### Graphic Library
 
-We implemented a simple terminal graphic library to display the projected 3D illusion onto the terminal. This graphic library is cross platform (tested on Mac's terminal and Windows' command prompt) as long as your terminal has support for unicode. This means the project is built using only C++ standard library with no other external dependencies.
+We will implement a simple terminal graphic library to display the projected 3D illusion onto the terminal. This graphic library is cross platform (will be tested on Mac's terminal and Windows' command prompt) as long as the terminal has support for unicode. The library will be included in this repo, meaning the 3D image projection can be displayed without the need of having to rely on any external graphic library. 
 
 ## Documentation:
 * **ENGINE Example of a 2D Plane Window Application.** 
