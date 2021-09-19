@@ -44,6 +44,13 @@ int Canvas::getCanvasHeight()
     return this->height;
 }
 
-int main()
+void Canvas::clearCanvas()
 {
+    this->charsMap.clear();
+
+#if defined(_WIN32)
+    system("cls");
+#else
+    system("clear");
+#endif
 }
