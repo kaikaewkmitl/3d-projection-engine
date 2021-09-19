@@ -28,6 +28,26 @@ int getPixel(int x, int y)
     return pixelMap[y][x];
 }
 
+std::string BrailleChar::toUnicode()
+{
+    std::string unicode = "";
+
+    // append color unicode
+    char color[CHAR_LIMIT];
+    sprintf(color, "\033[38;5;%dm", this->color);
+    unicode += std::string(color);
+
+    // append braille char unicode
+    std::wstring ws;
+    ws += (wchar_t)(BRAILLE_CHAR_OFFSET + this->ch);
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
+    unicode += cvt.to_bytes(ws);
+
+    unicode += COLOR_RESET;
+
+    return unicode;
+}
+
 Canvas newCanvas()
 {
     Canvas canv = Canvas();
@@ -188,27 +208,6 @@ void Canvas::drawTriangle(double x1, double y1, double x2, double y2, double x3,
     this->drawLine(x3, y3, x1, y1, color);
 }
 
-std::string Canvas::getUnicode(Char ch)
-{
-    std::string unicode = "";
-
-    // append color unicode
-    char color[CHAR_LIMIT];
-    sprintf(color, "\033[38;5;%dm", ch.color);
-    unicode += std::string(color);
-
-    // append braille char unicode
-    std::wstring ws;
-    ws += (wchar_t)(BRAILLE_CHAR_OFFSET + ch.ch);
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
-    unicode += cvt.to_bytes(ws);
-
-    // append color reset unicode
-    unicode += "\033[m";
-
-    return unicode;
-}
-
 std::vector<std::string> Canvas::getRows(int minX, int minY, int maxX, int maxY)
 {
     int minRow = minY / BRAILLE_CHAR_ROW, maxRow = maxY / BRAILLE_CHAR_ROW;
@@ -221,7 +220,7 @@ std::vector<std::string> Canvas::getRows(int minX, int minY, int maxX, int maxY)
 
         for (int j = minCol; j <= maxCol; j++)
         {
-            row += getUnicode(this->charsMap[i][j]);
+            row += this->charsMap[i][j].toUnicode();
         }
 
         rows.push_back(row);
@@ -230,7 +229,7 @@ std::vector<std::string> Canvas::getRows(int minX, int minY, int maxX, int maxY)
     return rows;
 }
 
-std::string Canvas::getFrame(int minX, int minY, int maxX, int maxY)
+std::string Canvas::getDisplay(int minX, int minY, int maxX, int maxY)
 {
     std::string frame = "";
     for (auto i : this->getRows(minX, minY, maxX, maxY))
@@ -242,7 +241,7 @@ std::string Canvas::getFrame(int minX, int minY, int maxX, int maxY)
     return frame;
 }
 
-std::string Canvas::toString()
+std::string Canvas::display()
 {
-    return this->getFrame(this->getMinX(), this->getMinY(), this->getMaxX(), this->getMaxY());
+    return this->getDisplay(this->getMinX(), this->getMinY(), this->getMaxX(), this->getMaxY());
 }

@@ -6,5 +6,5 @@ int main()
 
     c.drawLine(0, 0, 100, 100);
 
-    std::cout << c.toString();
+    std::cout << c.display();
 }

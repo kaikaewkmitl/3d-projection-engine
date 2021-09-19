@@ -22,6 +22,7 @@
 #define BRAILLE_CHAR_COL 2
 #define CHAR_LIMIT 100
 #define NEWLINE "\n"
+#define COLOR_RESET "\033[m"
 
 const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
     {1, 8},
@@ -30,13 +31,40 @@ const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
     {64, 128},
 };
 
+enum eColorCode
+{
+    ColorBlack,
+    ColorMaroon,
+    ColorGreen,
+    ColorOlive,
+    ColorNavy,
+    ColorPurple,
+    ColorTeal,
+    ColorSilver,
+    ColorGrey,
+    ColorRed,
+    ColorLime,
+    ColorYellow,
+    ColorBlue,
+    ColorFuchsia,
+    ColorAqua,
+    ColorWhite,
+
+    // greyscale gradient can be obtained
+    // by a number between 232 - 255
+    ColorGreyScaleBlack = 232,
+    ColorGreyScaleWhite = 255,
+};
+
 double toRadians(double deg);
 
 int getPixel(int x, int y);
 
-struct Char
+struct BrailleChar
 {
     int ch, color;
+
+    std::string toUnicode();
 };
 
 class Canvas
@@ -45,7 +73,7 @@ private:
     int width, height;
 
     // maps position [y][x] to a given Char
-    std::map<int, std::map<int, Char>> charsMap;
+    std::map<int, std::map<int, BrailleChar>> charsMap;
 
 public:
     Canvas();
@@ -74,13 +102,11 @@ public:
 
     void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color = 255);
 
-    std::string getUnicode(Char ch);
-
     std::vector<std::string> getRows(int minX, int minY, int maxX, int maxY);
 
-    std::string getFrame(int minX, int minY, int maxX, int maxY);
+    std::string getDisplay(int minX, int minY, int maxX, int maxY);
 
-    std::string toString();
+    std::string display();
 };
 
 Canvas newCanvas();
