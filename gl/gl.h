@@ -17,7 +17,7 @@
 #endif
 
 #define PI 3.14159
-#define BRAILLE_CHAR_OFFSET 2800
+#define BRAILLE_CHAR_OFFSET 10240
 #define BRAILLE_CHAR_ROW 4
 #define BRAILLE_CHAR_COL 2
 #define CHAR_LIMIT 100
@@ -25,7 +25,7 @@
 
 const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
     {1, 8},
-    {2, 10},
+    {2, 16},
     {4, 32},
     {64, 128},
 };
@@ -70,9 +70,9 @@ public:
 
     void setChar(int x, int y, int color);
 
-    void drawLine(double x1, double y1, double x2, double y2, int color);
+    void drawLine(double x1, double y1, double x2, double y2, int color = 255);
 
-    void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color);
+    void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color = 255);
 
     std::string getUnicode(Char ch);
 

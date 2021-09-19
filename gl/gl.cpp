@@ -140,7 +140,7 @@ void Canvas::setChar(int x, int y, int color)
     this->charsMap[posY][posX].color = color;
 }
 
-void Canvas::drawLine(double x1, double y1, double x2, double y2, int color = 255)
+void Canvas::drawLine(double x1, double y1, double x2, double y2, int color)
 {
     double diffX = abs(x1 - x2), diffY = abs(y1 - y2);
     double dirX, dirY;
