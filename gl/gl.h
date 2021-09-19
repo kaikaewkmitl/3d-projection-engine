@@ -38,7 +38,9 @@ class Canvas
 {
 private:
     int width, height;
-    std::map<int, std::map<int, Char> > charsMap;
+
+    // maps position [y][x] to a given Char
+    std::map<int, std::map<int, Char>> charsMap;
 
 public:
     Canvas()
@@ -54,6 +56,16 @@ public:
     int getMaxY();
 
     int getMinY();
+
+    int getMaxX();
+
+    int getMinX();
+
+    int getPosY(int y);
+
+    int getPosX(int x);
+
+    void setChar(int x, int y, int color);
 };
 
 Canvas newCanvas();

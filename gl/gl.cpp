@@ -54,3 +54,73 @@ void Canvas::clearCanvas()
     system("clear");
 #endif
 }
+
+int Canvas::getMaxY()
+{
+    int maxi = 0;
+    for (auto i : this->charsMap)
+    {
+        maxi = std::max(maxi, i.first);
+    }
+
+    return maxi * BRAILLE_CHAR_ROW;
+}
+
+int Canvas::getMinY()
+{
+    int mini = 0;
+    for (auto i : this->charsMap)
+    {
+        mini = std::min(mini, i.first);
+    }
+
+    return mini * BRAILLE_CHAR_ROW;
+}
+
+int Canvas::getMaxX()
+{
+    int maxi = 0;
+    for (auto i : this->charsMap)
+    {
+        for (auto j : i.second)
+        {
+            maxi = std::max(maxi, j.first);
+        }
+    }
+
+    return maxi * BRAILLE_CHAR_COL;
+}
+
+int Canvas::getMinX()
+{
+    int mini = 0;
+    for (auto i : this->charsMap)
+    {
+        for (auto j : i.second)
+        {
+            mini = std::min(mini, j.first);
+        }
+    }
+
+    return mini * BRAILLE_CHAR_COL;
+}
+
+int Canvas::getPosY(int y)
+{
+    return y / BRAILLE_CHAR_ROW;
+}
+
+int Canvas::getPosX(int x)
+{
+    return x / BRAILLE_CHAR_COL;
+}
+
+void Canvas::setChar(int x, int y, int color)
+{
+    int posX = this->getPosX(x), posY = this->getPosY(y);
+    int curCh = this->charsMap[posY][posX].ch;
+    int pixel = getPixel(x, y);
+
+    this->charsMap[posY][posX].ch = (curCh | pixel);
+    this->charsMap[posY][posX].color = color;
+}
