@@ -39,13 +39,22 @@ std::string BrailleChar::toUnicode()
 
     // append braille char unicode
     std::wstring ws;
-    ws += (wchar_t)(BRAILLE_CHAR_OFFSET + this->ch);
+    ws += (wchar_t)(BRAILLE_CHAR_OFFSET + this->bChar);
     std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
     unicode += cvt.to_bytes(ws);
 
     unicode += COLOR_RESET;
 
     return unicode;
+}
+
+void BrailleChar::set(int x, int y, int color)
+{
+    int pixel = getPixel(x, y);
+    int curCh = this->bChar;
+
+    this->bChar = (curCh | pixel);
+    this->color = color;
 }
 
 Canvas newCanvas()
@@ -81,7 +90,7 @@ int Canvas::getCanvasHeight()
 
 void Canvas::clearCanvas()
 {
-    this->charsMap.clear();
+    this->bCharMap.clear();
 
 #if defined(_WIN32)
     system("cls");
@@ -93,7 +102,7 @@ void Canvas::clearCanvas()
 int Canvas::getMaxY()
 {
     int maxi = 0;
-    for (auto i : this->charsMap)
+    for (auto i : this->bCharMap)
     {
         maxi = std::max(maxi, i.first);
     }
@@ -104,7 +113,7 @@ int Canvas::getMaxY()
 int Canvas::getMinY()
 {
     int mini = 0;
-    for (auto i : this->charsMap)
+    for (auto i : this->bCharMap)
     {
         mini = std::min(mini, i.first);
     }
@@ -115,7 +124,7 @@ int Canvas::getMinY()
 int Canvas::getMaxX()
 {
     int maxi = 0;
-    for (auto i : this->charsMap)
+    for (auto i : this->bCharMap)
     {
         for (auto j : i.second)
         {
@@ -129,7 +138,7 @@ int Canvas::getMaxX()
 int Canvas::getMinX()
 {
     int mini = 0;
-    for (auto i : this->charsMap)
+    for (auto i : this->bCharMap)
     {
         for (auto j : i.second)
         {
@@ -150,14 +159,10 @@ int Canvas::getPosX(int x)
     return x / BRAILLE_CHAR_COL;
 }
 
-void Canvas::setChar(int x, int y, int color)
+void Canvas::setBChar(int x, int y, int color)
 {
     int posX = this->getPosX(x), posY = this->getPosY(y);
-    int curCh = this->charsMap[posY][posX].ch;
-    int pixel = getPixel(x, y);
-
-    this->charsMap[posY][posX].ch = (curCh | pixel);
-    this->charsMap[posY][posX].color = color;
+    this->bCharMap[posY][posX].set(x, y, color);
 }
 
 void Canvas::drawLine(double x1, double y1, double x2, double y2, int color)
@@ -197,7 +202,7 @@ void Canvas::drawLine(double x1, double y1, double x2, double y2, int color)
             x += ((double)i * diffX) / (diffMax * dirX);
         }
 
-        this->setChar(round(x), round(y), color);
+        this->setBChar(round(x), round(y), color);
     }
 }
 
@@ -220,7 +225,7 @@ std::vector<std::string> Canvas::getRows(int minX, int minY, int maxX, int maxY)
 
         for (int j = minCol; j <= maxCol; j++)
         {
-            row += this->charsMap[i][j].toUnicode();
+            row += this->bCharMap[i][j].toUnicode();
         }
 
         rows.push_back(row);

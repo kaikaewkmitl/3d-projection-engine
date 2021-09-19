@@ -62,9 +62,11 @@ int getPixel(int x, int y);
 
 struct BrailleChar
 {
-    int ch, color;
+    int bChar, color;
 
     std::string toUnicode();
+
+    void set(int x, int y, int color);
 };
 
 class Canvas
@@ -72,8 +74,8 @@ class Canvas
 private:
     int width, height;
 
-    // maps position [y][x] to a given Char
-    std::map<int, std::map<int, BrailleChar>> charsMap;
+    // maps position [y][x] to a given BrailleChar
+    std::map<int, std::map<int, BrailleChar>> bCharMap;
 
 public:
     Canvas();
@@ -96,11 +98,11 @@ public:
 
     int getPosX(int x);
 
-    void setChar(int x, int y, int color);
+    void setBChar(int x, int y, int color = ColorWhite);
 
-    void drawLine(double x1, double y1, double x2, double y2, int color = 255);
+    void drawLine(double x1, double y1, double x2, double y2, int color = ColorWhite);
 
-    void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color = 255);
+    void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color = ColorWhite);
 
     std::vector<std::string> getRows(int minX, int minY, int maxX, int maxY);
 
