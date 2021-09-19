@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <cmath>
+#include <unistd.h>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -43,9 +45,7 @@ private:
     std::map<int, std::map<int, Char>> charsMap;
 
 public:
-    Canvas()
-    {
-    }
+    Canvas();
 
     int getCanvasWidth();
 
@@ -66,6 +66,8 @@ public:
     int getPosX(int x);
 
     void setChar(int x, int y, int color);
+
+    void drawLine(double x1, double y1, double x2, double y2, int color);
 };
 
 Canvas newCanvas();

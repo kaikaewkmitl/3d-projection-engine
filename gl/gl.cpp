@@ -34,6 +34,21 @@ Canvas newCanvas()
     return canv;
 }
 
+Canvas::Canvas()
+{
+#if defined(_WIN32)
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    this->width = (int)(csbi.srWindow.Right - csbi.srWindow.Left + 1);
+    this->height = (int)(csbi.srWindow.Bottom - csbi.srWindow.Top + 1);
+#else
+    struct winsize ws;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
+    this->width = ws.ws_col;
+    this->height = ws.ws_row;
+#endif
+}
+
 int Canvas::getCanvasWidth()
 {
     return this->width * BRAILLE_CHAR_COL;
@@ -123,4 +138,45 @@ void Canvas::setChar(int x, int y, int color)
 
     this->charsMap[posY][posX].ch = (curCh | pixel);
     this->charsMap[posY][posX].color = color;
+}
+
+void Canvas::drawLine(double x1, double y1, double x2, double y2, int color = 255)
+{
+    double diffX = abs(x1 - x2), diffY = abs(y1 - y2);
+    double dirX, dirY;
+
+    if (x1 <= x2)
+    {
+        dirX = 1;
+    }
+    else
+    {
+        dirX = -1;
+    }
+
+    if (y1 <= y2)
+    {
+        dirY = 1;
+    }
+    else
+    {
+        dirY = -1;
+    }
+
+    double diffMax = std::max(diffX, diffY);
+    for (int i = 0; i < round(diffMax); i++)
+    {
+        double x = x1, y = y1;
+        if (diffY != 0)
+        {
+            y += ((double)i * diffY) / (diffMax * dirY);
+        }
+
+        if (diffX != 0)
+        {
+            x += ((double)i * diffX) / (diffMax * dirX);
+        }
+
+        this->setChar(round(x), round(y), color);
+    }
 }
