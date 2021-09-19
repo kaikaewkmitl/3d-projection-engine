@@ -3,8 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include <map>
 #include <cmath>
+#include <codecvt>
 #include <unistd.h>
 
 #if defined(_WIN32)
@@ -18,6 +20,7 @@
 #define BRAILLE_CHAR_OFFSET 2800
 #define BRAILLE_CHAR_ROW 4
 #define BRAILLE_CHAR_COL 2
+#define CHAR_LIMIT 100
 #define NEWLINE "\n"
 
 const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
@@ -68,6 +71,16 @@ public:
     void setChar(int x, int y, int color);
 
     void drawLine(double x1, double y1, double x2, double y2, int color);
+
+    void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color);
+
+    std::string getUnicode(Char ch);
+
+    std::vector<std::string> getRows(int minX, int minY, int maxX, int maxY);
+
+    std::string getFrame(int minX, int minY, int maxX, int maxY);
+
+    std::string toString();
 };
 
 Canvas newCanvas();

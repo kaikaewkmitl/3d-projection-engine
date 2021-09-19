@@ -180,3 +180,69 @@ void Canvas::drawLine(double x1, double y1, double x2, double y2, int color = 25
         this->setChar(round(x), round(y), color);
     }
 }
+
+void Canvas::drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color)
+{
+    this->drawLine(x1, y1, x2, y2, color);
+    this->drawLine(x2, y2, x3, y3, color);
+    this->drawLine(x3, y3, x1, y1, color);
+}
+
+std::string Canvas::getUnicode(Char ch)
+{
+    std::string unicode = "";
+
+    // append color unicode
+    char color[CHAR_LIMIT];
+    sprintf(color, "\033[38;5;%dm", ch.color);
+    unicode += std::string(color);
+
+    // append braille char unicode
+    std::wstring ws;
+    ws += (wchar_t)(BRAILLE_CHAR_OFFSET + ch.ch);
+    std::wstring_convert<std::codecvt_utf8<wchar_t>> cvt;
+    unicode += cvt.to_bytes(ws);
+
+    // append color reset unicode
+    unicode += "\033[m";
+
+    return unicode;
+}
+
+std::vector<std::string> Canvas::getRows(int minX, int minY, int maxX, int maxY)
+{
+    int minRow = minY / BRAILLE_CHAR_ROW, maxRow = maxY / BRAILLE_CHAR_ROW;
+    int minCol = minX / BRAILLE_CHAR_COL, maxCol = maxX / BRAILLE_CHAR_COL;
+    std::vector<std::string> rows;
+
+    for (int i = minRow; i <= maxRow; i++)
+    {
+        std::string row = "";
+
+        for (int j = minCol; j <= maxCol; j++)
+        {
+            row += getUnicode(this->charsMap[i][j]);
+        }
+
+        rows.push_back(row);
+    }
+
+    return rows;
+}
+
+std::string Canvas::getFrame(int minX, int minY, int maxX, int maxY)
+{
+    std::string frame = "";
+    for (auto i : this->getRows(minX, minY, maxX, maxY))
+    {
+        frame += i;
+        frame += NEWLINE;
+    }
+
+    return frame;
+}
+
+std::string Canvas::toString()
+{
+    return this->getFrame(this->getMinX(), this->getMinY(), this->getMaxX(), this->getMaxY());
+}
