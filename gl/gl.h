@@ -8,6 +8,7 @@
 #include <cmath>
 #include <codecvt>
 #include <unistd.h>
+#include <functional>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -108,9 +109,9 @@ public:
 
     std::string getDisplay(int minX, int minY, int maxX, int maxY);
 
-    std::string display();
-};
+    void display();
 
-Canvas newCanvas();
+    void mainloop(std::function<void(Canvas *)> callback);
+};
 
 #endif

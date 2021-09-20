@@ -32,7 +32,7 @@ std::string BrailleChar::toUnicode()
 {
     std::string unicode = "";
 
-    // append color unicode
+    // apply color
     char color[CHAR_LIMIT];
     sprintf(color, "\033[38;5;%dm", this->color);
     unicode += std::string(color);
@@ -55,12 +55,6 @@ void BrailleChar::set(int x, int y, int color)
 
     this->bChar = (curCh | pixel);
     this->color = color;
-}
-
-Canvas newCanvas()
-{
-    Canvas canv = Canvas();
-    return canv;
 }
 
 Canvas::Canvas()
@@ -246,7 +240,19 @@ std::string Canvas::getDisplay(int minX, int minY, int maxX, int maxY)
     return frame;
 }
 
-std::string Canvas::display()
+void Canvas::display()
 {
-    return this->getDisplay(this->getMinX(), this->getMinY(), this->getMaxX(), this->getMaxY());
+    std::cout << this->getDisplay(this->getMinX(), this->getMinY(), this->getMaxX(), this->getMaxY());
+}
+
+void Canvas::mainloop(std::function<void(Canvas *)> callback)
+{
+    while (true)
+    {
+        callback(this);
+
+        this->display();
+        usleep(100000);
+        this->clearCanvas();
+    }
 }
