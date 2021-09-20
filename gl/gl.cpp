@@ -72,6 +72,11 @@ Canvas::Canvas()
 #endif
 }
 
+void Canvas::exit()
+{
+    std::cout << "program exitted" << std::endl;
+}
+
 int Canvas::getCanvasWidth()
 {
     return this->width * BRAILLE_CHAR_COL;
@@ -245,8 +250,11 @@ void Canvas::display()
     std::cout << this->getDisplay(this->getMinX(), this->getMinY(), this->getMaxX(), this->getMaxY());
 }
 
+bool programExit = false;
+
 void Canvas::mainloop(std::function<void(Canvas *)> callback)
 {
+
     while (true)
     {
         callback(this);
@@ -254,5 +262,15 @@ void Canvas::mainloop(std::function<void(Canvas *)> callback)
         this->display();
         usleep(100000);
         this->clearCanvas();
+
+        signal(SIGINT, [](int sig)
+               { programExit = true; });
+
+        if (programExit)
+        {
+            break;
+        }
     }
+
+    this->exit();
 }

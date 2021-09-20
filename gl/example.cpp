@@ -14,7 +14,6 @@ int main()
 
 void callback(Canvas *c)
 {
-
     if (first)
     {
         first = 0;

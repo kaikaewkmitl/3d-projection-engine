@@ -81,6 +81,8 @@ private:
 public:
     Canvas();
 
+    void exit();
+
     int getCanvasWidth();
 
     int getCanvasHeight();
