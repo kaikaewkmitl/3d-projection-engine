@@ -175,18 +175,19 @@ int Canvas::getPosX(int x)
     return x / BRAILLE_CHAR_COL;
 }
 
-void Canvas::setBChar(int x, int y, int color)
+void Canvas::setBChar(Vector2D v1, int color)
 {
+    int x = round(v1.x), y = round(v1.y);
     int posX = this->getPosX(x), posY = this->getPosY(y);
     this->bCharMap[posY][posX].set(x, y, color);
 }
 
-void Canvas::drawLine(float x1, float y1, float x2, float y2, int color)
+void Canvas::drawLine(Vector2D v1, Vector2D v2, int color)
 {
-    float diffX = abs(x1 - x2), diffY = abs(y1 - y2);
+    float diffX = abs(v1.x - v2.x), diffY = abs(v1.y - v2.y);
     float dirX, dirY;
 
-    if (x1 <= x2)
+    if (v1.x <= v2.x)
     {
         dirX = 1;
     }
@@ -195,7 +196,7 @@ void Canvas::drawLine(float x1, float y1, float x2, float y2, int color)
         dirX = -1;
     }
 
-    if (y1 <= y2)
+    if (v1.y <= v2.y)
     {
         dirY = 1;
     }
@@ -207,7 +208,7 @@ void Canvas::drawLine(float x1, float y1, float x2, float y2, int color)
     float diffMax = std::max(diffX, diffY);
     for (int i = 0; i < round(diffMax); i++)
     {
-        float x = x1, y = y1;
+        float x = v1.x, y = v1.y;
         if (diffY != 0)
         {
             y += ((float)i * diffY) / (diffMax * dirY);
@@ -218,15 +219,15 @@ void Canvas::drawLine(float x1, float y1, float x2, float y2, int color)
             x += ((float)i * diffX) / (diffMax * dirX);
         }
 
-        this->setBChar(round(x), round(y), color);
+        this->setBChar({x, y}, color);
     }
 }
 
-void Canvas::drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color)
+void Canvas::drawTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color)
 {
-    this->drawLine(x1, y1, x2, y2, color);
-    this->drawLine(x2, y2, x3, y3, color);
-    this->drawLine(x3, y3, x1, y1, color);
+    this->drawLine(v1, v2, color);
+    this->drawLine(v2, v3, color);
+    this->drawLine(v3, v1, color);
 }
 
 std::vector<std::string> Canvas::getRows(int minX, int minY, int maxX, int maxY)

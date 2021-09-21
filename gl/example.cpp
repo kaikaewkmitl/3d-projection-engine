@@ -2,26 +2,29 @@
 
 void callback(Canvas *c);
 
-class Engine : public Canvas
+class Example : public Canvas
 {
 public:
     bool first = true;
     std::vector<int> v;
 
-    Engine() : v(100) {}
+    Example() : v(100) {}
 };
 
 int main()
 {
 
-    Engine *e = new Engine();
+    Example *e = new Example();
     e->mainloop(callback);
+
     delete e;
 }
 
 void callback(Canvas *c)
 {
-    Engine *e = (Engine *)c;
+    // typecast to Example * to
+    // obtain its attributes
+    Example *e = (Example *)c;
 
     if (e->first)
     {
@@ -34,7 +37,7 @@ void callback(Canvas *c)
             else
                 y = 50 + (49 - i);
 
-            c->setBChar(i, y, ColorRed);
+            c->setBChar({(float)i, (float)y}, ColorRed);
             e->v[i] = y;
         }
     }
@@ -44,7 +47,7 @@ void callback(Canvas *c)
         for (int i = 0; i < 100; i++)
         {
             tmp[i] = e->v[(i + 1) % 100];
-            c->setBChar(i, tmp[i], ColorRed);
+            c->setBChar({(float)i, (float)tmp[i]}, ColorRed);
         }
 
         e->v = tmp;

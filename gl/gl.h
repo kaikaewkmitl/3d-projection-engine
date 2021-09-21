@@ -54,7 +54,12 @@ struct BrailleChar
 
     std::string toUnicode();
 
-    void set(int x, int y, int color);
+    void set(int x, int y, int color = ColorWhite);
+};
+
+struct Vector2D
+{
+    float x, y;
 };
 
 class Canvas
@@ -94,11 +99,11 @@ public:
 
     int getCanvasHeight();
 
-    void setBChar(int x, int y, int color = ColorWhite);
+    void setBChar(Vector2D v1, int color = ColorWhite);
 
-    void drawLine(float x1, float y1, float x2, float y2, int color = ColorWhite);
+    void drawLine(Vector2D v1, Vector2D v2, int color = ColorWhite);
 
-    void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color = ColorWhite);
+    void drawTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color = ColorWhite);
 
     void mainloop(std::function<void(Canvas *)> callback);
 };
