@@ -1,22 +1,31 @@
 #include "gl.h"
 
-bool first = 1;
-std::vector<int> v(100);
-
 void callback(Canvas *c);
+
+class Engine : public Canvas
+{
+public:
+    bool first = true;
+    std::vector<int> v;
+
+    Engine() : v(100) {}
+};
 
 int main()
 {
-    Canvas *c = new Canvas();
-    c->mainloop(callback);
-    delete c;
+
+    Engine *e = new Engine();
+    e->mainloop(callback);
+    delete e;
 }
 
 void callback(Canvas *c)
 {
-    if (first)
+    Engine *e = (Engine *)c;
+
+    if (e->first)
     {
-        first = 0;
+        e->first = 0;
         for (int i = 0; i < 100; i++)
         {
             int y;
@@ -26,7 +35,7 @@ void callback(Canvas *c)
                 y = 50 + (49 - i);
 
             c->setBChar(i, y, ColorRed);
-            v[i] = y;
+            e->v[i] = y;
         }
     }
     else
@@ -34,10 +43,10 @@ void callback(Canvas *c)
         std::vector<int> tmp(100);
         for (int i = 0; i < 100; i++)
         {
-            tmp[i] = v[(i + 1) % 100];
+            tmp[i] = e->v[(i + 1) % 100];
             c->setBChar(i, tmp[i], ColorRed);
         }
 
-        v = tmp;
+        e->v = tmp;
     }
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <cmath>
 #include <codecvt>
 #include <unistd.h>
@@ -63,7 +63,7 @@ private:
     int width, height;
 
     // maps position [y][x] to a given BrailleChar
-    std::map<int, std::map<int, BrailleChar>> bCharMap;
+    std::unordered_map<int, std::unordered_map<int, BrailleChar>> bCharMap;
 
     void clearCanvas();
 

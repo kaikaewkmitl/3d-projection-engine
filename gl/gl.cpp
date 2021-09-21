@@ -269,7 +269,6 @@ void Canvas::display()
 
 void Canvas::mainloop(std::function<void(Canvas *)> callback)
 {
-
     while (true)
     {
         callback(this);
