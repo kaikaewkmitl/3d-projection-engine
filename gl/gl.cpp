@@ -1,6 +1,23 @@
 #include "gl.h"
 
-double toRadians(double deg)
+#define PI 3.14159
+#define BRAILLE_CHAR_OFFSET 10240
+#define BRAILLE_CHAR_ROW 4
+#define BRAILLE_CHAR_COL 2
+#define CHAR_LIMIT 100
+#define NEWLINE "\n"
+#define COLOR_RESET "\033[m"
+
+const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
+    {1, 8},
+    {2, 16},
+    {4, 32},
+    {64, 128},
+};
+
+bool programExit = false;
+
+float toRadians(float deg)
 {
     return deg * (PI / 180);
 }
@@ -164,10 +181,10 @@ void Canvas::setBChar(int x, int y, int color)
     this->bCharMap[posY][posX].set(x, y, color);
 }
 
-void Canvas::drawLine(double x1, double y1, double x2, double y2, int color)
+void Canvas::drawLine(float x1, float y1, float x2, float y2, int color)
 {
-    double diffX = abs(x1 - x2), diffY = abs(y1 - y2);
-    double dirX, dirY;
+    float diffX = abs(x1 - x2), diffY = abs(y1 - y2);
+    float dirX, dirY;
 
     if (x1 <= x2)
     {
@@ -187,25 +204,25 @@ void Canvas::drawLine(double x1, double y1, double x2, double y2, int color)
         dirY = -1;
     }
 
-    double diffMax = std::max(diffX, diffY);
+    float diffMax = std::max(diffX, diffY);
     for (int i = 0; i < round(diffMax); i++)
     {
-        double x = x1, y = y1;
+        float x = x1, y = y1;
         if (diffY != 0)
         {
-            y += ((double)i * diffY) / (diffMax * dirY);
+            y += ((float)i * diffY) / (diffMax * dirY);
         }
 
         if (diffX != 0)
         {
-            x += ((double)i * diffX) / (diffMax * dirX);
+            x += ((float)i * diffX) / (diffMax * dirX);
         }
 
         this->setBChar(round(x), round(y), color);
     }
 }
 
-void Canvas::drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color)
+void Canvas::drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color)
 {
     this->drawLine(x1, y1, x2, y2, color);
     this->drawLine(x2, y2, x3, y3, color);
@@ -249,8 +266,6 @@ void Canvas::display()
 {
     std::cout << this->getDisplay(this->getMinX(), this->getMinY(), this->getMaxX(), this->getMaxY());
 }
-
-bool programExit = false;
 
 void Canvas::mainloop(std::function<void(Canvas *)> callback)
 {

@@ -17,21 +17,8 @@
 #include <sys/ioctl.h>
 #endif
 
-#define PI 3.14159
-#define BRAILLE_CHAR_OFFSET 10240
-#define BRAILLE_CHAR_ROW 4
-#define BRAILLE_CHAR_COL 2
-#define CHAR_LIMIT 100
-#define NEWLINE "\n"
-#define COLOR_RESET "\033[m"
-
-const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
-    {1, 8},
-    {2, 16},
-    {4, 32},
-    {64, 128},
-};
-
+// some colors index from
+// ANSI 256 color code
 enum eColorCode
 {
     ColorBlack,
@@ -57,7 +44,7 @@ enum eColorCode
     ColorGreyScaleWhite = 255,
 };
 
-double toRadians(double deg);
+float toRadians(float deg);
 
 int getPixel(int x, int y);
 
@@ -78,15 +65,6 @@ private:
     // maps position [y][x] to a given BrailleChar
     std::map<int, std::map<int, BrailleChar>> bCharMap;
 
-public:
-    Canvas();
-
-    void exit();
-
-    int getCanvasWidth();
-
-    int getCanvasHeight();
-
     void clearCanvas();
 
     int getMaxY();
@@ -101,17 +79,26 @@ public:
 
     int getPosX(int x);
 
-    void setBChar(int x, int y, int color = ColorWhite);
-
-    void drawLine(double x1, double y1, double x2, double y2, int color = ColorWhite);
-
-    void drawTriangle(double x1, double y1, double x2, double y2, double x3, double y3, int color = ColorWhite);
-
     std::vector<std::string> getRows(int minX, int minY, int maxX, int maxY);
 
     std::string getDisplay(int minX, int minY, int maxX, int maxY);
 
     void display();
+
+    void exit();
+
+public:
+    Canvas();
+
+    int getCanvasWidth();
+
+    int getCanvasHeight();
+
+    void setBChar(int x, int y, int color = ColorWhite);
+
+    void drawLine(float x1, float y1, float x2, float y2, int color = ColorWhite);
+
+    void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, int color = ColorWhite);
 
     void mainloop(std::function<void(Canvas *)> callback);
 };
