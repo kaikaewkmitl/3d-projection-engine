@@ -45,6 +45,12 @@ int getPixel(int x, int y)
     return pixelMap[y][x];
 }
 
+void sortVecByY(std::vector<Vector2D> &v)
+{
+    std::sort(v.begin(), v.end(), [](Vector2D &v1, Vector2D &v2)
+              { return v1.y < v2.y; });
+}
+
 std::string BrailleChar::toUnicode()
 {
     std::string unicode = "";
@@ -228,6 +234,58 @@ void Canvas::drawTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color)
     this->drawLine(v1, v2, color);
     this->drawLine(v2, v3, color);
     this->drawLine(v3, v1, color);
+}
+
+void Canvas::fillBottomFlatTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color)
+{
+    // need to find the change of x per y step
+    // which is dx/dy, in other words an inverse slope
+    float invSlope1 = (v2.x - v1.x) / (v2.y - v1.y);
+    float invSlope2 = (v3.x - v1.x) / (v3.y - v1.y);
+    float x1 = v1.x, x2 = v1.x;
+
+    for (int y = v1.y; y <= v2.y; y++)
+    {
+        this->drawLine({x1, (float)y}, {x2, (float)y});
+        x1 += invSlope1;
+        x2 += invSlope2;
+    }
+}
+
+void Canvas::fillTopFlatTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color)
+{
+    float invSlope1 = (v3.x - v1.x) / (v3.y - v1.y);
+    float invSlope2 = (v3.x - v2.x) / (v3.y - v2.y);
+    float x1 = v3.x, x2 = v3.x;
+
+    for (int y = v3.y; y > v1.y; y--)
+    {
+        this->drawLine({x1, (float)y}, {x2, (float)y});
+        x1 -= invSlope1;
+        x2 -= invSlope2;
+    }
+}
+
+void Canvas::fillTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color)
+{
+    std::vector<Vector2D> v = {v1, v2, v3};
+    sortVecByY(v);
+
+    if (v[1].y == v[2].y)
+    {
+        this->fillBottomFlatTriangle(v[0], v[1], v[2]);
+    }
+    else if (v[0].y == v[1].y)
+    {
+        this->fillTopFlatTriangle(v[0], v[1], v[2]);
+    }
+    else
+    {
+        float x4 = v[0].x + ((float)(v[1].y - v[0].y) / (float)(v[2].y - v[0].y)) * (v[2].x - v[0].x);
+        float y4 = v[1].y;
+        this->fillBottomFlatTriangle(v[0], v[1], {x4, y4});
+        this->fillTopFlatTriangle(v[1], {x4, y4}, v[2]);
+    }
 }
 
 std::vector<std::string> Canvas::getRows(int minX, int minY, int maxX, int maxY)

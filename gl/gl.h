@@ -9,6 +9,7 @@
 #include <codecvt>
 #include <unistd.h>
 #include <functional>
+#include <algorithm>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -47,6 +48,9 @@ enum eColorCode
 float toRadians(float deg);
 
 int getPixel(int x, int y);
+
+// sort a vector of Vector2D by y in ascending order
+void sortVecByY(std::vector<Vector2D> &v);
 
 struct BrailleChar
 {
@@ -92,6 +96,10 @@ private:
 
     void exit();
 
+    void fillBottomFlatTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color = ColorWhite);
+
+    void fillTopFlatTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color = ColorWhite);
+
 public:
     Canvas();
 
@@ -104,6 +112,8 @@ public:
     void drawLine(Vector2D v1, Vector2D v2, int color = ColorWhite);
 
     void drawTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color = ColorWhite);
+
+    void fillTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color = ColorWhite);
 
     void mainloop(std::function<void(Canvas *)> callback);
 };

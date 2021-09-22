@@ -22,8 +22,8 @@ int main()
 
 void callback(Canvas *c)
 {
-    // typecast to Example * to
-    // obtain its attributes
+    // typecast to (Example *) to be
+    // able to access its attributes
     Example *e = (Example *)c;
 
     if (e->first)
