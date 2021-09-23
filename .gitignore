@@ -1,4 +1,7 @@
 .DS_Store
+.vscode
+gl/example1
+gl/example2
 
 # windows executables
 *.exe
