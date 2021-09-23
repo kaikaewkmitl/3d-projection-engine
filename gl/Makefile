@@ -3,6 +3,7 @@ e1 = example1
 e2 = example2
 
 windows: windows_cleanup build windows_rm
+	chcp 65001
 
 mac: mac_cleanup build mac_rm
 
