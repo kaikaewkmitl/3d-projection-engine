@@ -11,19 +11,19 @@ void callback(Canvas *c);
 // additional attributes (ie, bool first
 // and vector<int> v). An alternative
 // would be to declare those as global
-class Example : public Canvas
+class Example2 : public Canvas
 {
 public:
     bool first = true;
     std::vector<int> v;
 
-    Example() : v(100) {}
+    Example2() : v(100) {}
 };
 
 int main()
 {
 
-    Example *e = new Example();
+    Example2 *e = new Example2();
     int exitStatus = e->mainloop(callback);
     delete e;
 
@@ -32,9 +32,9 @@ int main()
 
 void callback(Canvas *c)
 {
-    // typecast to (Example *) to be
+    // typecast to (Example2 *) to be
     // able to access its attributes
-    Example *e = (Example *)c;
+    Example2 *e = (Example2 *)c;
 
     // this part contains the program logic
     // which will be run on every loop

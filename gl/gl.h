@@ -22,7 +22,7 @@
 #define PROGRAM_EXIT_FAIL -1
 
 // the first 16 color and
-// the greyscale code
+// the greyscale codes
 // defined in ANSI 256 colors
 enum eColorCode
 {
@@ -55,7 +55,7 @@ int getPixel(int x, int y);
 
 // this gl uses Braille characters
 // to display everything instead of
-// pixel since terminal are
+// pixel since terminals are
 // character-cell displays
 struct BrailleChar
 {
@@ -66,7 +66,7 @@ struct BrailleChar
     void set(int x, int y, int color = ColorWhite);
 };
 
-// contains x and y coordinate
+// contains x and y coordinates
 struct Vector2D
 {
     float x, y;
