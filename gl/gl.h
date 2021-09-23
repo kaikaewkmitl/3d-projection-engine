@@ -18,6 +18,9 @@
 #include <sys/ioctl.h>
 #endif
 
+#define PROGRAM_EXIT_SUCCESS 0
+#define PROGRAM_EXIT_FAIL -1
+
 // the first 16 color and
 // the greyscale code
 // defined in ANSI 256 colors
@@ -63,6 +66,7 @@ struct BrailleChar
     void set(int x, int y, int color = ColorWhite);
 };
 
+// contains x and y coordinate
 struct Vector2D
 {
     float x, y;
@@ -93,13 +97,19 @@ private:
 
     int getPosX(int x);
 
+    // iterates through each row of bCharMap,
+    // concatenate BrailleChars in the same row
+    // together into a string, returns those
+    // strings of BrailleChars
     std::vector<std::string> getRows(int minX, int minY, int maxX, int maxY);
 
+    // iterates through strings of BrailleChars
+    // received from getRows() then formats them
+    // by adding newline after every strings
     std::string getDisplay(int minX, int minY, int maxX, int maxY);
 
+    // displays to stdout
     void display();
-
-    void exit();
 
     void fillBottomFlatTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color = ColorWhite);
 
@@ -126,7 +136,7 @@ public:
     // mainloop takes a callback function as a parameter
     // which will be called on every loop until there is
     // interrupt signal (Ctrl + C)
-    void mainloop(std::function<void(Canvas *)> callback);
+    int mainloop(std::function<void(Canvas *)> callback);
 };
 
 #endif

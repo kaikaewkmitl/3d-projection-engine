@@ -40,6 +40,8 @@ int main()
     // passes callback function
     // to mainloop so that it gets
     // executed on every loop
-    e->mainloop(callback);
+    int exitStatus = e->mainloop(callback);
     delete e;
+
+    std::cout << "program exitted with status " << exitStatus << std::endl;
 }

@@ -24,8 +24,10 @@ int main()
 {
 
     Example *e = new Example();
-    e->mainloop(callback);
+    int exitStatus = e->mainloop(callback);
     delete e;
+
+    std::cout << "program exitted with status " << exitStatus << std::endl;
 }
 
 void callback(Canvas *c)
