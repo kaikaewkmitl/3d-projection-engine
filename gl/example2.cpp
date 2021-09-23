@@ -1,27 +1,66 @@
+// a program to demonstrate the usage of this
+// gl by displaying a simple animated graph
+
 #include "gl.h"
 
-class Example2 : public Canvas
+// callback function definition
+void callback(Canvas *c);
+
+// define a sub class that inherits
+// from gl's Canvas class to set some
+// additional attributes (ie, bool first
+// and vector<int> v). An alternative
+// would be to declare those as global
+class Example : public Canvas
 {
 public:
-    Vector2D v1, v2, v3;
+    bool first = true;
+    std::vector<int> v;
 
-    Example2()
-    {
-        v1 = {100.0f, 30.0f};
-        v2 = {75.0f, 10.0f};
-        v3 = {100.0f, 50.0f};
-    }
+    Example() : v(100) {}
 };
-
-void cb(Canvas *c)
-{
-    Example2 *e = (Example2 *)c;
-    e->fillTriangle(e->v1, e->v2, e->v3);
-}
 
 int main()
 {
-    Example2 *e = new Example2();
-    e->mainloop(cb);
+
+    Example *e = new Example();
+    e->mainloop(callback);
     delete e;
+}
+
+void callback(Canvas *c)
+{
+    // typecast to (Example *) to be
+    // able to access its attributes
+    Example *e = (Example *)c;
+
+    // this part contains the program logic
+    // which will be run on every loop
+    if (e->first)
+    {
+        e->first = 0;
+        for (int x = 0; x < 100; x++)
+        {
+            int y;
+            if (x < 50)
+                y = x;
+            else
+                y = 50 + (49 - x);
+
+            // draw a BChar at position (x,y) with color red
+            c->setBChar({(float)x, (float)y}, ColorRed);
+            e->v[x] = y;
+        }
+    }
+    else
+    {
+        std::vector<int> tmp(100);
+        for (int x = 0; x < 100; x++)
+        {
+            tmp[x] = e->v[(x + 1) % 100];
+            c->setBChar({(float)x, (float)tmp[x]}, ColorRed);
+        }
+
+        e->v = tmp;
+    }
 }

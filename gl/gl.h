@@ -18,8 +18,9 @@
 #include <sys/ioctl.h>
 #endif
 
-// some colors index from
-// ANSI 256 color code
+// the first 16 color and
+// the greyscale code
+// defined in ANSI 256 colors
 enum eColorCode
 {
     ColorBlack,
@@ -49,9 +50,10 @@ float toRadians(float deg);
 
 int getPixel(int x, int y);
 
-// sort a vector of Vector2D by y in ascending order
-void sortVecByY(std::vector<Vector2D> &v);
-
+// this gl uses Braille characters
+// to display everything instead of
+// pixel since terminal are
+// character-cell displays
 struct BrailleChar
 {
     int bChar, color;
@@ -65,6 +67,9 @@ struct Vector2D
 {
     float x, y;
 };
+
+// sort a vector of Vector2D by y in ascending order
+void sortVecByY(std::vector<Vector2D> &v);
 
 class Canvas
 {
@@ -107,6 +112,9 @@ public:
 
     int getCanvasHeight();
 
+    // sets a Braille Character at the position (x,y)
+    // with the color specified. If the color is not
+    // specified, it is white by default
     void setBChar(Vector2D v1, int color = ColorWhite);
 
     void drawLine(Vector2D v1, Vector2D v2, int color = ColorWhite);
@@ -115,6 +123,9 @@ public:
 
     void fillTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color = ColorWhite);
 
+    // mainloop takes a callback function as a parameter
+    // which will be called on every loop until there is
+    // interrupt signal (Ctrl + C)
     void mainloop(std::function<void(Canvas *)> callback);
 };
 
