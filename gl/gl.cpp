@@ -55,9 +55,9 @@ std::string BrailleChar::toUnicode()
 {
     std::string unicode = "";
 
-    // apply color
+    // apply black bg then specified fg color
     char color[CHAR_LIMIT];
-    sprintf(color, "\033[38;5;%dm", this->color);
+    sprintf(color, "\033[48;5;%dm\033[38;5;%dm", ColorBlack, this->color);
     unicode += std::string(color);
 
     // append braille char unicode
