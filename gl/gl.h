@@ -53,7 +53,7 @@ float toRadians(float deg);
 
 int getPixel(int x, int y);
 
-// this gl uses Braille characters
+// uses Braille characters
 // to display everything instead of
 // pixel since terminals are
 // character-cell displays
