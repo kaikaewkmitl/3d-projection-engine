@@ -66,6 +66,10 @@ void callback(Canvas *c)
 }
 ```
 
+the output:
+
+<img alt="example1 output" src="/images/gl_example1.png">
+
 ## Examples
 
 2 simple example programs are provided as a guide
