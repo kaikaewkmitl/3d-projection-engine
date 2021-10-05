@@ -7,6 +7,10 @@
 #define CHAR_LIMIT 100
 #define NEWLINE "\n"
 #define COLOR_RESET "\033[m"
+#define COLOR_FG(color) std::string("\033[38;5;") + std::to_string(color) + std::string("m")
+#define COLOR_BG(color) std::string("\033[48;5;") + std::to_string(color) + std::string("m")
+#define CLEAR_LINE "\033[2K"
+#define CURSOR_HOME "\033[H"
 
 const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
     {1, 8},
@@ -55,10 +59,9 @@ std::string BrailleChar::toUnicode()
 {
     std::string unicode = "";
 
-    // apply color
-    char color[CHAR_LIMIT];
-    sprintf(color, "\033[38;5;%dm", this->color);
-    unicode += std::string(color);
+    // apply black bg and specified fg color
+    unicode += COLOR_BG(ColorBlack);
+    unicode += COLOR_FG(this->color);
 
     // append braille char unicode
     std::wstring ws;
@@ -110,9 +113,17 @@ void Canvas::clearCanvas()
     this->bCharMap.clear();
 
 #if defined(_WIN32)
-    system("cls");
+    const char *sh = getenv("SH");
+    if (sh == "bash")
+    {
+        std::cout << CURSOR_HOME;
+    }
+    else
+    {
+        system("cls");
+    }
 #else
-    system("clear");
+    std::cout << CURSOR_HOME;
 #endif
 }
 
@@ -323,6 +334,7 @@ void Canvas::display()
 
 int Canvas::mainloop(std::function<void(Canvas *)> callback)
 {
+    this->clearCanvas();
     while (true)
     {
         callback(this);
@@ -336,6 +348,7 @@ int Canvas::mainloop(std::function<void(Canvas *)> callback)
 
         if (programExit)
         {
+            std::cout << CLEAR_LINE;
             return PROGRAM_EXIT_SUCCESS;
         }
     }
