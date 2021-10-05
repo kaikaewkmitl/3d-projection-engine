@@ -74,19 +74,30 @@ the output:
 
 2 simple example programs are provided as a guide
 
-you can build those examples by:
+you can build those examples by (required Makefile):
 
-### Windows(cmd and powershell)
+### Windows
 
-using Makefile:
+powershell:
 ```
-make windows
+make powershell
 example1.exe
+```
+
+cmd:
+```
+make cmd
+example1.exe
+```
+
+bash:
+```
+make bash
+./example1
 ```
 
 ### Mac
 
-using Makefile:
 ```
 make mac
 ./example1
