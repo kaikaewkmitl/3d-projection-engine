@@ -85,6 +85,8 @@ private:
 
     void clearCanvas();
 
+    void overwriteCanvas();
+
     int getMaxY();
 
     int getMinY();

@@ -114,7 +114,26 @@ void Canvas::clearCanvas()
 
 #if defined(_WIN32)
     const char *sh = getenv("SH");
-    if (sh == "bash")
+    if (sh && std::string(sh) == "bash")
+    {
+        system("clear");
+    }
+    else
+    {
+        system("cls");
+    }
+#else
+    system("clear");
+#endif
+}
+
+void Canvas::overwriteCanvas()
+{
+    this->bCharMap.clear();
+
+#if defined(_WIN32)
+    const char *sh = getenv("SH");
+    if (sh && std::string(sh) == "bash")
     {
         std::cout << CURSOR_HOME;
     }
@@ -341,7 +360,7 @@ int Canvas::mainloop(std::function<void(Canvas *)> callback)
 
         this->display();
         usleep(100000);
-        this->clearCanvas();
+        this->overwriteCanvas();
 
         signal(SIGINT, [](int sig)
                { programExit = true; });

@@ -16,7 +16,7 @@ windows_rm:
 	del $(e1).o $(e2).o gl.o
 
 bash: mac
-	export SH=bash
+	SH=bash
 
 mac: mac_cleanup build mac_rm
 
