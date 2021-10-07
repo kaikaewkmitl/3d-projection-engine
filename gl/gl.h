@@ -84,12 +84,7 @@ private:
     // maps position [y][x] to a given BrailleChar
     std::unordered_map<int, std::unordered_map<int, BrailleChar>> bCharMap;
 
-    // clear command for Mac and bash
-    // cls for powershell and cmd
     void clearCanvas();
-
-    // returns cursor to row 0, col 0 in Mac and bash
-    void overwriteCanvas();
 
     int getMaxY();
 
