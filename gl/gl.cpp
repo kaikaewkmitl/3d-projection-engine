@@ -1,6 +1,5 @@
 #include "gl.h"
 
-#define PI 3.14159
 #define BRAILLE_CHAR_OFFSET 10240
 #define BRAILLE_CHAR_ROW 4
 #define BRAILLE_CHAR_COL 2
@@ -360,7 +359,8 @@ int Canvas::mainloop(std::function<void(Canvas *)> callback)
 
         this->display();
         usleep(100000);
-        this->overwriteCanvas();
+        // this->overwriteCanvas();
+        this->clearCanvas();
 
         signal(SIGINT, [](int sig)
                { programExit = true; });

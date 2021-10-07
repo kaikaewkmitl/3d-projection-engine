@@ -20,6 +20,7 @@
 
 #define PROGRAM_EXIT_SUCCESS 0
 #define PROGRAM_EXIT_FAIL -1
+#define PI 3.14159
 
 // the first 16 color and
 // the greyscale codes
