@@ -81,7 +81,7 @@ you can build those examples by (required Makefile):
 powershell:
 ```
 make powershell
-example1.exe
+.\example1.exe
 ```
 
 cmd:
