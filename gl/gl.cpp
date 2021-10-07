@@ -1,6 +1,5 @@
 #include "gl.h"
 
-#define PI 3.14159
 #define BRAILLE_CHAR_OFFSET 10240
 #define BRAILLE_CHAR_ROW 4
 #define BRAILLE_CHAR_COL 2
@@ -11,6 +10,7 @@
 #define COLOR_BG(color) std::string("\033[48;5;") + std::to_string(color) + std::string("m")
 #define CLEAR_LINE "\033[2K"
 #define CURSOR_HOME "\033[H"
+#define CLEAR_SCREEN "\033[1J"
 
 const int pixelMap[BRAILLE_CHAR_ROW][BRAILLE_CHAR_COL] = {
     {1, 8},
@@ -116,33 +116,14 @@ void Canvas::clearCanvas()
     const char *sh = getenv("SH");
     if (sh && std::string(sh) == "bash")
     {
-        system("clear");
+        std::cout << CLEAR_SCREEN << CURSOR_HOME;
     }
     else
     {
         system("cls");
     }
 #else
-    system("clear");
-#endif
-}
-
-void Canvas::overwriteCanvas()
-{
-    this->bCharMap.clear();
-
-#if defined(_WIN32)
-    const char *sh = getenv("SH");
-    if (sh && std::string(sh) == "bash")
-    {
-        std::cout << CURSOR_HOME;
-    }
-    else
-    {
-        system("cls");
-    }
-#else
-    std::cout << CURSOR_HOME;
+    std::cout << CLEAR_SCREEN << CURSOR_HOME;
 #endif
 }
 
@@ -360,14 +341,13 @@ int Canvas::mainloop(std::function<void(Canvas *)> callback)
 
         this->display();
         usleep(100000);
-        this->overwriteCanvas();
+        this->clearCanvas();
 
         signal(SIGINT, [](int sig)
                { programExit = true; });
 
         if (programExit)
         {
-            std::cout << CLEAR_LINE;
             return PROGRAM_EXIT_SUCCESS;
         }
     }
