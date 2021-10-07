@@ -113,8 +113,8 @@ void Canvas::clearCanvas()
     this->bCharMap.clear();
 
 #if defined(_WIN32)
-    const char *sh = getenv("SH");
-    if (sh && std::string(sh) == "bash")
+    const char *shell = getenv("SHELL");
+    if (shell && std::string(shell) == "/usr/bin/bash")
     {
         std::cout << CLEAR_SCREEN << CURSOR_HOME;
     }
