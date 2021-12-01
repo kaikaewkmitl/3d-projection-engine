@@ -86,11 +86,13 @@ void BrailleChar::set(int x, int y, int color)
 Canvas::Canvas()
 {
 #if defined(_WIN32)
+    // get screen width and height for Windows
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     this->width = (int)(csbi.srWindow.Right - csbi.srWindow.Left + 1);
     this->height = (int)(csbi.srWindow.Bottom - csbi.srWindow.Top + 1);
 #else
+    // get screen width and height for MacOS
     struct winsize ws;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
     this->width = ws.ws_col;

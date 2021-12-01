@@ -17,13 +17,18 @@ windows_rm:
 
 bash: mac
 
-mac: mac_cleanup build mac_rm
+mac: mac_cleanup mac_build
 
 mac_cleanup:
 	rm -f $(e1) $(e2)
+	rm -rf build
 
-mac_rm:
-	rm $(e1).o $(e2).o gl.o
+mac_build:
+	mkdir build && cd build; \
+	cmake .. && cmake --build .; \
+	mv $(e1) ..; \
+	mv $(e2) ..; \
+	cd ..; \
 
 build: gl $(e1) $(e2)
 
