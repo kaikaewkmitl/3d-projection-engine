@@ -254,7 +254,7 @@ void Canvas::fillBottomFlatTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int c
 
     for (int y = v1.y; y <= v2.y; y++)
     {
-        this->drawLine({x1, (float)y}, {x2, (float)y});
+        this->drawLine({x1, (float)y}, {x2, (float)y}, color);
         x1 += invSlope1;
         x2 += invSlope2;
     }
@@ -268,7 +268,7 @@ void Canvas::fillTopFlatTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int colo
 
     for (int y = v3.y; y > v1.y; y--)
     {
-        this->drawLine({x1, (float)y}, {x2, (float)y});
+        this->drawLine({x1, (float)y}, {x2, (float)y}, color);
         x1 -= invSlope1;
         x2 -= invSlope2;
     }
@@ -281,18 +281,18 @@ void Canvas::fillTriangle(Vector2D v1, Vector2D v2, Vector2D v3, int color)
 
     if (v[1].y == v[2].y)
     {
-        this->fillBottomFlatTriangle(v[0], v[1], v[2]);
+        this->fillBottomFlatTriangle(v[0], v[1], v[2], color);
     }
     else if (v[0].y == v[1].y)
     {
-        this->fillTopFlatTriangle(v[0], v[1], v[2]);
+        this->fillTopFlatTriangle(v[0], v[1], v[2], color);
     }
     else
     {
         float x4 = v[0].x + ((float)(v[1].y - v[0].y) / (float)(v[2].y - v[0].y)) * (v[2].x - v[0].x);
         float y4 = v[1].y;
-        this->fillBottomFlatTriangle(v[0], v[1], {x4, y4});
-        this->fillTopFlatTriangle(v[1], {x4, y4}, v[2]);
+        this->fillBottomFlatTriangle(v[0], v[1], {x4, y4}, color);
+        this->fillTopFlatTriangle(v[1], {x4, y4}, v[2], color);
     }
 }
 

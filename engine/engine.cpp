@@ -12,6 +12,7 @@ struct Vector3D
 struct Triangle
 {
     Vector3D p[3];
+    int color;
 };
 
 struct Mesh
@@ -80,6 +81,20 @@ void multiplyMatrixVector(Vector3D &i, Vector3D &o, Matrix4X4 &m)
         o.y /= w;
         o.z /= w;
     }
+}
+
+int getColour(float lum)
+{
+    int brightness = (int)(24 * lum);
+    for (int i = 0; i < 24; i++)
+    {
+        if (i == brightness)
+        {
+            return ColorGreyScaleBlack + i;
+        }
+    }
+
+    return ColorGreyScaleWhite;
 }
 
 int main()
@@ -154,6 +169,17 @@ void callback(Canvas *c)
         float dotProduct = normal.x * triTranslated.p[0].x + normal.y * triTranslated.p[0].y + normal.z * triTranslated.p[0].z;
         if (dotProduct < 0.0f)
         {
+            // illumination
+            Vector3D lightDir = {0.0f, 0.0f, -1.0f};
+            magnitude = sqrt(lightDir.x * lightDir.x + lightDir.y * lightDir.y + lightDir.z * lightDir.z);
+            lightDir.x /= magnitude;
+            lightDir.y /= magnitude;
+            lightDir.z /= magnitude;
+
+            dotProduct = normal.x * lightDir.x + normal.y * lightDir.y + normal.z * lightDir.z;
+
+            triProjected.color = getColour(dotProduct);
+
             multiplyMatrixVector(triTranslated.p[0], triProjected.p[0], e->matProjection);
             multiplyMatrixVector(triTranslated.p[1], triProjected.p[1], e->matProjection);
             multiplyMatrixVector(triTranslated.p[2], triProjected.p[2], e->matProjection);
@@ -183,16 +209,19 @@ void callback(Canvas *c)
               {
                   float z1 = (t1.p[0].z + t1.p[1].z + t1.p[2].z) / 3.0f;
                   float z2 = (t2.p[0].z + t2.p[1].z + t2.p[2].z) / 3.0f;
-                  return z1 > z2;
-              });
+                  return z1 > z2; });
 
     for (auto &tri : sortedTris)
     {
         Vector2D v1 = {tri.p[0].x, tri.p[0].y};
         Vector2D v2 = {tri.p[1].x, tri.p[1].y};
         Vector2D v3 = {tri.p[2].x, tri.p[2].y};
-        e->drawTriangle(v1, v2, v3);
+
+        Vector2D v[3] = {v1, v2, v3};
+        std::sort(v, v + 3, [](Vector2D &v1, Vector2D &v2)
+                  { return v1.x < v2.x; });
+        e->fillTriangle(v[0], v[1], v[2], tri.color);
     }
 
-    e->inc += 0.3f;
+    e->inc += 0.1f;
 }
