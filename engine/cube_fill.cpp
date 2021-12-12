@@ -9,12 +9,15 @@ struct Vector3D
     float z = 0.0f;
 };
 
+// each triangle are made up of 3 points
 struct Triangle
 {
     Vector3D p[3];
     int color;
 };
 
+// each mesh (object) are made up of
+// at least 1 triangle
 struct Mesh
 {
     std::vector<Triangle> tris;
@@ -34,10 +37,13 @@ public:
 
     Engine()
     {
-        this->height = this->getCanvasHeight() * 2.0f;
+        this->height = this->getCanvasHeight();
         this->width = this->getCanvasWidth();
 
+        // each row of cube.tris represent a triangle
+        // a cube made up of 12 triangles (2 on each face)
         this->cube.tris = {
+            // x1    y1    z1    x2    y2    z2    x3    y3    z3
             {0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f},
             {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f},
             {1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f},
@@ -184,43 +190,33 @@ void callback(Canvas *c)
             multiplyMatrixVector(triTranslated.p[1], triProjected.p[1], e->matProjection);
             multiplyMatrixVector(triTranslated.p[2], triProjected.p[2], e->matProjection);
 
-            triProjected.p[0].x += 2.0f;
-            triProjected.p[0].y += 2.0f;
+            triProjected.p[0].x += 1.0f;
+            triProjected.p[0].y += 1.0f;
 
-            triProjected.p[1].x += 2.0f;
-            triProjected.p[1].y += 2.0f;
+            triProjected.p[1].x += 1.0f;
+            triProjected.p[1].y += 1.0f;
 
-            triProjected.p[2].x += 2.0f;
-            triProjected.p[2].y += 2.0f;
+            triProjected.p[2].x += 1.0f;
+            triProjected.p[2].y += 1.0f;
 
-            triProjected.p[0].x *= 0.25f * e->width;
-            triProjected.p[1].x *= 0.25f * e->width;
-            triProjected.p[2].x *= 0.25f * e->width;
+            triProjected.p[0].x *= 0.4f * e->width;
+            triProjected.p[1].x *= 0.4f * e->width;
+            triProjected.p[2].x *= 0.4f * e->width;
 
-            triProjected.p[0].y *= 0.5f * e->height;
-            triProjected.p[1].y *= 0.5f * e->height;
-            triProjected.p[2].y *= 0.5f * e->height;
+            triProjected.p[0].y *= 0.8f * e->height;
+            triProjected.p[1].y *= 0.8f * e->height;
+            triProjected.p[2].y *= 0.8f * e->height;
 
             sortedTris.push_back(triProjected);
         }
     }
-
-    std::sort(sortedTris.begin(), sortedTris.end(), [](Triangle &t1, Triangle &t2)
-              {
-                  float z1 = (t1.p[0].z + t1.p[1].z + t1.p[2].z) / 3.0f;
-                  float z2 = (t2.p[0].z + t2.p[1].z + t2.p[2].z) / 3.0f;
-                  return z1 > z2; });
 
     for (auto &tri : sortedTris)
     {
         Vector2D v1 = {tri.p[0].x, tri.p[0].y};
         Vector2D v2 = {tri.p[1].x, tri.p[1].y};
         Vector2D v3 = {tri.p[2].x, tri.p[2].y};
-
-        Vector2D v[3] = {v1, v2, v3};
-        std::sort(v, v + 3, [](Vector2D &v1, Vector2D &v2)
-                  { return v1.x < v2.x; });
-        e->fillTriangle(v[0], v[1], v[2], tri.color);
+        e->fillTriangle(v1, v2, v3, tri.color);
     }
 
     e->inc += 0.1f;

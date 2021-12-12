@@ -2,9 +2,12 @@
 .vscode
 gl/example1
 gl/example2
+gl/example3
 gl/build
 
-engine/engine
+engine/cube_no_fill
+engine/cube_fill
+engine/spaceship
 engine/build
 
 # windows executables

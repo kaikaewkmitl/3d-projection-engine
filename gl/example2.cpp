@@ -47,6 +47,7 @@ public:
         for (int i = 0; i < 8; i++)
         {
             this->vertices[i] = translate(vertices[i], pointOfRotation);
+            // this->vertices[i] = translate(vertices[i], {100.0f, 100.0f, 0.0f});
         }
     }
 };
