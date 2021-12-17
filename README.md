@@ -40,7 +40,10 @@ Additionally a camera can be made by constantly updating our "perspective" upon 
 
 #### Graphic Library
 
-We will implement a simple terminal graphic library to display the projected 3D illusion onto the terminal. This graphic library is cross platform (will be tested on Mac's terminal and Windows' command prompt) as long as the terminal has support for unicode. The library will be included in this repo, meaning the 3D image projection can be displayed without the need of having to rely on any external graphic library. 
+We will implement a simple terminal graphic library to display the projected 3D illusion onto the terminal. This graphic library is cross platform  as long as the terminal has support for unicode. The library will be included in this repo, meaning the 3D image projection can be displayed without the need of having to rely on any external graphic library. 
+
+## Finalized Project Output Sample:
+![](images/final.jpg)
 
 ## Documentation:
 * **ENGINE Example of a 2D Plane Window Application.** 
@@ -57,12 +60,10 @@ P are vertices of the object
 ![](images/matrix%20rotation.jpg)
 
 
-## Trivia, Reference and Requirements:
-Programming Language: *C++*
-*Simple Graphic Libary*
+
+
 
  
 
-## Finalized Project Output Sample:
-![](images/final.jpg)
+
 
