@@ -63,6 +63,6 @@ Programming Language: *C++
 
  
 
-## Example of the finalized project:
-![](images/final.png)
+## Finalized Project Output Sample:
+![](images/final.jpg)
 
