@@ -30,7 +30,7 @@ array[i] = y *(i in range (x,y)) + x
 
 ##### Checkpoint 2
 
-Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to translate the variable and calculate the "object" and  "projection" output for us. In additional, we can in fact create a simple graphic libary ourselves. For more detail about the method please read the documentation provided [below](#documentation).
+Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to translate the variable and calculate the "object" and  "projection" output for us. In additional, we can in fact create a simple graphic libary ourselves. For more detail about the method please read the documentation provided [below](#documentation and reference).
 
 ##### Checkpoint 3
 
