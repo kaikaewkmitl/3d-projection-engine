@@ -58,8 +58,8 @@ P are vertices of the object
 
 
 ## Trivia, Reference and Requirements:
-Programming Language: *C++
-*Simple Graphic Libary 
+Programming Language: *C++*
+*Simple Graphic Libary*
 
  
 
