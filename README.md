@@ -45,7 +45,7 @@ We will implement a simple terminal graphic library to display the projected 3D 
 ## Finalized Project Output Sample:
 ![](images/final.jpg)
 
-## Documentation:
+## Documentation and Reference:
 * **ENGINE Example of a 2D Plane Window Application.** 
 ![](images/2dgameengineexample.png)
 ![](images/p2.png)
