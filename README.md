@@ -58,15 +58,10 @@ P are vertices of the object
 
 
 ## Trivia, Reference and Requirements:
-* C/C++ Optional Lbaries:
-  * Graphic library 
-  * OpenGL 
-  * SFML 
-  * DirectX 
-  * olcgameengine https://www.youtube.com/watch?v=u5BhrA8ED0o&t=1080s&ab_channel=javidx9 
-  * 2DgameEngine Derived from Direct2D 
-* Recommended IDE: 
-  * Visual Studio IDE 
+Programming Language: *C++
+*Simple Graphic Libary 
+
+ 
 
 ## Example of the finalized project:
 ![](images/final.png)
