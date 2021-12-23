@@ -116,13 +116,14 @@ void Canvas::clearCanvas()
 
 #if defined(_WIN32)
     const char *shell = getenv("SHELL");
-    if (shell && std::string(shell) == "/usr/bin/bash")
+    if (shell == NULL)
     {
-        std::cout << CLEAR_SCREEN << CURSOR_HOME;
+        // run using powershell or cmd.exe
+        system("cls");
     }
     else
     {
-        system("cls");
+        std::cout << CLEAR_SCREEN << CURSOR_HOME;
     }
 #else
     std::cout << CLEAR_SCREEN << CURSOR_HOME;
