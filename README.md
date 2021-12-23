@@ -25,24 +25,27 @@ This program consists mainly of 2 parts:
 #### 3D Engine
 
 ##### Checkpoint 1
-We first need a console engine that creates a 'blank' window application from win32 api,directx or any other optional libary (in our case, our own simple library) in order to show us the output/result and serve us as a GUI for example olcgameengine window which is made up of 6base number 6x6 array in which each array is translated from a coordinate(x,y) with the following formula: 
+We first need to creates a 'blank' window application from win32 api,directx or any other optional libary (in our case, our own simple library) in order to show us the output/result and serve us as a GUI for example there is a community made external libary called olcgameengine window which is made up of 6base number 6x6 array in which each array is translated from a coordinate(x,y) with the following formula: 
 array[i] = y *(i in range (x,y)) + x 
 
 ##### Checkpoint 2
 
-Next we need a base engine from any graphical libary composed of functions that has a mathematics formula that receives our parameter/input and logic to translate the variable and calculate the "object" and  "projection" output for us. For more detail about the method please read the documentation provided [below](#documentation).
+Next we need functions maybe from graphic libary that has a mathematics formula that receives our parameter/input and logic to translate the variable and calculate the "object" and  "projection" output for us. In additional, we can in fact create a simple graphic libary ourselves. For more detail about the method please read the documentation provided [below](#documentationandreference).
 
 ##### Checkpoint 3
 
-Finally we can observe the outcome from our designated "perspective", also we can make the object dynamic by constantly updating its position precisely using "matrix rotation" and mathematics.
+Finally we can observe the outcome from our designated "perspective", also we can make the object dynamic by constantly updating its position precisely for instance, using "matrix rotation" and mathematics.
 * Room for improvement \
 Additionally a camera can be made by constantly updating our "perspective" upon WASD input thus ray-casting and ray-tracing is possible to make up a viable first person game also we can add texture to the object or import a texture by reading a FILE which contains our desired parameter(input) in a specified format (example, .obj file).
 
 #### Graphic Library
 
-We will implement a simple terminal graphic library to display the projected 3D illusion onto the terminal. This graphic library is cross platform (will be tested on Mac's terminal and Windows' command prompt) as long as the terminal has support for unicode. The library will be included in this repo, meaning the 3D image projection can be displayed without the need of having to rely on any external graphic library. 
+We will implement a simple terminal graphic library to display the projected 3D illusion onto the terminal. This graphic library is cross platform  as long as the terminal has support for unicode. The library will be included in this repo, meaning the 3D image projection can be displayed without the need of having to rely on any external graphic library. 
 
-## Documentation:
+## Finalized Project Output Sample:
+![](images/final.jpg)
+
+## Documentation and Reference:
 * **ENGINE Example of a 2D Plane Window Application.** 
 ![](images/2dgameengineexample.png)
 ![](images/p2.png)
@@ -57,17 +60,10 @@ P are vertices of the object
 ![](images/matrix%20rotation.jpg)
 
 
-## Trivia, Reference and Requirements:
-* C/C++ Optional Lbaries:
-  * Graphic library 
-  * OpenGL 
-  * SFML 
-  * DirectX 
-  * olcgameengine https://www.youtube.com/watch?v=u5BhrA8ED0o&t=1080s&ab_channel=javidx9 
-  * 2DgameEngine Derived from Direct2D 
-* Recommended IDE: 
-  * Visual Studio IDE 
 
-## Example of the finalized project:
-![](images/final.png)
+
+
+ 
+
+
 
