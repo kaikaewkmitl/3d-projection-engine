@@ -60,10 +60,6 @@ P are vertices of the object
 ![](images/matrix%20rotation.jpg)
 
 
+## Todo
 
-
-
- 
-
-
-
+- Make the program runnable using Git Bash from Windows machine
