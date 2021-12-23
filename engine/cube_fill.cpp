@@ -33,7 +33,7 @@ class Engine : public Canvas
 public:
     Mesh cube;
     Matrix4X4 matProjection, matRotationX, matRotationZ;
-    float height, width, near, far, fov, fovRad, aspectRatio, inc;
+    float height, width, near_, far_, fov, fovRad, aspectRatio, inc;
 
     Engine()
     {
@@ -58,8 +58,8 @@ public:
             {1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f},
         };
 
-        this->near = 0.1f;
-        this->far = 1000.0f;
+        this->near_ = 0.1f;
+        this->far_ = 1000.0f;
         this->fov = 90.0f;
         this->fovRad = 1.0f / tanf(this->fov * 0.5f / 180.0f * PI);
         this->aspectRatio = (float)this->height / (float)this->width;
@@ -67,8 +67,8 @@ public:
 
         this->matProjection.mat[0][0] = this->aspectRatio * this->fovRad;
         this->matProjection.mat[1][1] = this->fovRad;
-        this->matProjection.mat[2][2] = this->far / (this->far - this->near);
-        this->matProjection.mat[3][2] = (-this->far * this->near) / (this->far - this->near);
+        this->matProjection.mat[2][2] = this->far_ / (this->far_ - this->near_);
+        this->matProjection.mat[3][2] = (-this->far_ * this->near_) / (this->far_ - this->near_);
         this->matProjection.mat[2][3] = 1.0f;
         this->matProjection.mat[3][3] = 0.0f;
     }
